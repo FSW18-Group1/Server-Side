@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
   Leaderboards.init({
     playerId: DataTypes.INTEGER,
     gameId: DataTypes.INTEGER,
-    result: DataTypes.INTEGER,
+    points: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
   }, {
     sequelize,
     modelName: 'Leaderboards',

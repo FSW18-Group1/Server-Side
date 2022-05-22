@@ -22,7 +22,7 @@ module.exports = {
           key: 'id',
         }
       },
-      result: {
+      points: {
         type: Sequelize.INTEGER
       },
       createdAt: {
