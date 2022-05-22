@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Games.hasOne(models.Leaderboards,{foreignKey:'gameID',sourceKey:'id'})
+      Games.hasOne(models.Leaderboards,{foreignKey:'gameId',sourceKey:'id'})
     }
   }
   Games.init({
