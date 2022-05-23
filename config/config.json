@@ -1,14 +1,14 @@
 {
   "development": {
-    "username": "process.env.DB_USERNAME_DEV",
-    "password": "process.env.DB_PASSWORD_DEV",
+    "username": "postgres",
+    "password": "postgres",
     "database": "database_development",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "process.env.DB_USERNAME_TEST",
-    "password": "process.env.DB_PASSWORD_TEST",
+    "username": "postgres",
+    "password": "postgres",
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
@@ -20,6 +20,7 @@
      "ssl": {
        "require": true,
        "rejectUnauthorized": false
-     },
-   },
+     }
+   }
+  }
 }
