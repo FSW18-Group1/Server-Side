@@ -31,7 +31,7 @@ class LeaderboardsController {
     try {
       const {id} = req.params;
       const listLeaderboard = await Leaderboards.findAll({
-        where:{gameId:id},
+        where: {gameId:id},
         limit: 5,
         order: [['points','DESC']],
         include:[ Games, Players ],
@@ -40,6 +40,7 @@ class LeaderboardsController {
         }
       });
       if (listLeaderboard) {
+        console.log(("datanya",listLeaderboard));
         res.status(200).json({
           result: 'Success',
           data: listLeaderboard
@@ -56,6 +57,35 @@ class LeaderboardsController {
       next(error);
     }
   }
+
+  // static async submitScore(req,res,next){
+  //   try {
+  //     const {gamesid} = req.params;
+  //     const {playerId} = req.cookie.data.id;
+  //     const leaderboard = await Leaderboards.findAll({
+  //       where:{
+  //         gameId: gamesid,
+  //         playerId: playerId,
+  //       },
+  //     });
+  //     if (leaderboard) {
+  //       const point = req.body;
+  //       const updateleaderboard = await Leaderboards.update(req.body,{
+  //         where:{
+  //           points: point
+  //         }
+  //       });
+  //       if (updateleaderboard){
+  //         return res.status(200).json({
+  //           result: "Success",
+  //           message: "Leaderboard successfully updated",
+  //         });
+  //       };
+  //     };
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 }
 
 module.exports = { LeaderboardsController }
