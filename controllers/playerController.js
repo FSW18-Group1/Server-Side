@@ -174,6 +174,7 @@ class PlayerController{
         const payload = {
           id: Player.id,
           username : Player.username,
+          email: Player.email,
         };
         const secret = process.env.SECRET;
         const token = jwt.sign(payload,secret,{expiresIn: '1 hour', noTimestamp: true});
@@ -181,9 +182,8 @@ class PlayerController{
         // console.log(payload)
         res.status(200).json({
           result: 'Success',
-          // data: Player,
-          cookie: token,
-          
+          data: payload,
+          cookie: token,          
         });
       }     
     } catch (error) {
