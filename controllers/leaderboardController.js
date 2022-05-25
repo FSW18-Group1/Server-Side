@@ -65,25 +65,11 @@ class LeaderboardsController {
       const updatedleaderboard = await Leaderboards.update({points: points},{
         where: {  gameId: id, playerId: req.body.id },
       });   
-
-      // const leaderboard = await Leaderboards.findAll({
-      //   include: [Games,Players],
-      //   where: {gameId: id, playerId: req.body.id}});
-      // if (leaderboard) {
-      //   const updatedleaderboard = await Leaderboards.update(points,{
-      //     // include: [Games,Players],
-      //     where: {gameId: id, playerId: req.body.id,},
-      //   }
-      //   ); 
-      //   console.log("masuk",updatedleaderboard);
-      //   res.send(updatedleaderboard)       
-      // }
-      console.log("masuk",points, id, req.body.id);
+      // console.log("masuk",points, id, req.body.id);
       if (updatedleaderboard == 1 ) {
         return res.status(200).json({
           result: "Success",
-          message: "Points successfully updated",
-          data: updatedleaderboard,
+          message: "Points successfully updated"
         });
       } else {
         return res.status(500).json({
