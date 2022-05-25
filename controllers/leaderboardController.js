@@ -58,34 +58,58 @@ class LeaderboardsController {
     }
   }
 
-  // static async submitScore(req,res,next){
-  //   try {
-  //     const {gamesid} = req.params;
-  //     const {playerId} = req.cookie.data.id;
-  //     const leaderboard = await Leaderboards.findAll({
-  //       where:{
-  //         gameId: gamesid,
-  //         playerId: playerId,
-  //       },
-  //     });
-  //     if (leaderboard) {
-  //       const point = req.body;
-  //       const updateleaderboard = await Leaderboards.update(req.body,{
-  //         where:{
-  //           points: point
-  //         }
-  //       });
-  //       if (updateleaderboard){
-  //         return res.status(200).json({
-  //           result: "Success",
-  //           message: "Leaderboard successfully updated",
-  //         });
-  //       };
-  //     };
-  //   } catch (error) {
-  //     next(error)
-  //   }
-  // }
+  static async submitScore(req,res,next){
+    try {
+      const {id} = req.params;
+      const points  = req.body.points; 
+      const updatedleaderboard = await Leaderboards.update({points: points},{
+        where: {  gameId: id, playerId: req.body.id },
+      });   
+
+      // const leaderboard = await Leaderboards.findAll({
+      //   include: [Games,Players],
+      //   where: {gameId: id, playerId: req.body.id}});
+      // if (leaderboard) {
+      //   const updatedleaderboard = await Leaderboards.update(points,{
+      //     // include: [Games,Players],
+      //     where: {gameId: id, playerId: req.body.id,},
+      //   }
+      //   ); 
+      //   console.log("masuk",updatedleaderboard);
+      //   res.send(updatedleaderboard)       
+      // }
+      console.log("masuk",points, id, req.body.id);
+      if (updatedleaderboard == 1 ) {
+        return res.status(200).json({
+          result: "Success",
+          message: "Points successfully updated",
+          data: updatedleaderboard,
+        });
+      } else {
+        return res.status(500).json({
+          result: "Failed",
+          message: "Failed to update",
+        });
+      }
+
+
+      // if (leaderboard) {
+      //   const point = req.body;
+      //   const updateleaderboard = await Leaderboards.update({where: {
+      //     points: point
+      //   }});
+      //   if (updateleaderboard){
+      //     return res.status(200).json({
+      //       result: "Success",
+      //       message: "Updated",
+      //       data: updateleaderboard
+      //     })
+      //   }
+      // };      
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = { LeaderboardsController }
