@@ -62,20 +62,40 @@ class LeaderboardsController {
     try {
       const {id} = req.params;
       const points  = req.body.points; 
-      const updatedleaderboard = await Leaderboards.update({points: points},{
-        where: {  gameId: id, playerId: req.body.id },
-      });   
-      // console.log("masuk",points, id, req.body.id);
-      if (updatedleaderboard == 1 ) {
-        return res.status(200).json({
-          result: "Success",
-          message: "Points successfully updated"
-        });
+      const player = req.body.id;
+      const listplayer = await Leaderboards.findOne({where:{
+        playerId: player,
+        gameId: id,
+      }})
+      console.log(listplayer);
+      if (!listplayer) {
+        const createdLeaderboard = await Leaderboards.create({
+          playerId: player,
+          gameId: id,
+          points: points,
+        })
+        if (createdLeaderboard) {
+          return res.status(201).json({
+            result: "Success",
+            data: createdLeaderboard,
+          });
+        }
       } else {
-        return res.status(500).json({
-          result: "Failed",
-          message: "Failed to update",
-        });
+        const updatedleaderboard = await Leaderboards.update({points: points},{
+          where: {  gameId: id, playerId: player },
+        });   
+        // console.log("masuk",points, id, req.body.id);
+        if (updatedleaderboard == 1 ) {
+          return res.status(200).json({
+            result: "Success",
+            message: "Points successfully updated"
+          });
+        } else {
+          return res.status(500).json({
+            result: "Failed",
+            message: "Failed to update",
+          });
+        }        
       }
 
 
