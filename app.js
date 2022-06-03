@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000
 
 
 
-app.options('*', cors())
+app.use(cors())
 app.use(passport.initialize());
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
@@ -27,7 +27,7 @@ app.use(cookieParser())
 app.use("/", accessbilityRouter)
 app.use("/games", leaderboardRouter)
 app.use(authChecker)
-app.use("/profile", playerRouter)
+app.use("/profile",cors(), playerRouter)
 
 
 
