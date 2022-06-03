@@ -12,9 +12,20 @@ const errorHandler = require('./middlewares/errorHandler')
 const authChecker = require('./middlewares/authChecker')
 const cookieParser = require('cookie-parser')
 const PORT = process.env.PORT || 3000
+const whitelist = ["http://localhost:3000"]
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error("Not allowed by CORS"))
+    }
+  },
+  credentials: true,
+}
 
 
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(passport.initialize());
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
