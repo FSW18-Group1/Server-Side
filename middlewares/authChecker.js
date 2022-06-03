@@ -16,7 +16,7 @@ module.exports = async(req,res,next)=>{
       } else {
         res.status(403).json({
           result: 'Forbidden',
-          message: 'You must login first!!!',
+          message: 'You must login second!!!',
         });
       }
     }
