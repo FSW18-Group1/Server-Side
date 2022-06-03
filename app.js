@@ -12,11 +12,9 @@ const errorHandler = require('./middlewares/errorHandler')
 const authChecker = require('./middlewares/authChecker')
 const cookieParser = require('cookie-parser')
 const PORT = process.env.PORT || 3000
-const parameter = {
-  'origin': false
-}
 
-app.use(cors(parameter))
+
+app.use(cors())
 app.use(passport.initialize());
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
