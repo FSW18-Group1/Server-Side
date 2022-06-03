@@ -13,7 +13,8 @@ const authChecker = require('./middlewares/authChecker')
 const cookieParser = require('cookie-parser')
 const PORT = process.env.PORT || 3000
 const parameter = {
-  'credential': true
+  'credential': true,
+  'origin': true
 }
 
 app.use(cors(parameter))
