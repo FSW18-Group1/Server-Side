@@ -17,7 +17,9 @@ const PORT = process.env.PORT || 3000
 
 
 
-app.use(cors())
+app.use(cors({
+  origin:' https://challenge-chapter-9.herokuapp.com'
+}))
 app.use(passport.initialize());
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
