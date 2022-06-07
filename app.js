@@ -27,7 +27,7 @@ app.use(cookieParser())
 app.use("/", accessbilityRouter)
 app.use("/games", leaderboardRouter)
 app.use(authChecker)
-app.use("/profile",cors(), playerRouter)
+app.use("/profile", playerRouter)
 
 
 
