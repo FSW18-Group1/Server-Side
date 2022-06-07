@@ -16,7 +16,7 @@ module.exports = {
      {
        id: 1,
        username: 'llollwawa',
-       password: await hashPassword('hahahahahaha'),
+       password: await hashPassword('llollwawa'),
        email: 'llollwawa@gmail.com',
        createdAt: new Date(),
        updatedAt: new Date(),
@@ -24,7 +24,7 @@ module.exports = {
      {
        id: 2,
        username: 'llollwawux',
-       password: await hashPassword('hihihihihihi'),
+       password: await hashPassword('llollwawux'),
        email: 'llollwawux@gmail.com',
        createdAt: new Date(),
        updatedAt: new Date(),

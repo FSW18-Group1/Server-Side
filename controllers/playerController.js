@@ -165,6 +165,12 @@ class PlayerController{
       const hashedPassword = await hashPassword(password);
       const isValid = await verifyPassword(password,hashedPassword);
       const Player = await Players.findOne({where:{username,email}});
+      if (!Player) {
+        res.status(400).json({
+          result: 'Failed',
+          message: "Please register first",
+        });
+      }
       if (!isValid) {
         res.status(400).json({
           result: 'Failed',
@@ -178,12 +184,12 @@ class PlayerController{
         };
         const secret = process.env.SECRET;
         const token = jwt.sign(payload,secret,{expiresIn: '1 hour', noTimestamp: true});
-        res.cookie('token',token)
+        // res.cookie('token',token)
         // console.log(payload)
         res.status(200).json({
           result: 'Success',
           data: payload,
-          cookie: token,          
+          token: token,          
         });
       }     
     } catch (error) {

@@ -5,7 +5,7 @@ const { Players } = require('../models');
 
 
 const options = {
-  jwtFromRequest : ExtractJwt.fromHeader('authorization'),
+  jwtFromRequest : ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey : process.env.SECRET,
 }
 
