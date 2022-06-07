@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 module.exports = async(req,res,next)=>{
-  const token = req.signedCookies;
+  const token = req.cookies['token'];
   console.log('masuk 1',req);
   try {
     const player = jwt.verify(token,process.env.SECRET);
