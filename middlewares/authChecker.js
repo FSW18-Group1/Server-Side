@@ -12,8 +12,7 @@ module.exports = async(req,res,next)=>{
       if (login) {
         req.player = player;
         // console.log('masuk 4',player);
-        res.header("Access-Control-Allow-Origin","*");
-        res.header("Access-Control-Allow-Credentials",true);
+
         next()
       } else {
         res.status(403).json({
