@@ -13,16 +13,12 @@ const authChecker = require('./middlewares/authChecker')
 const cookieParser = require('cookie-parser')
 const PORT = process.env.PORT || 3000
 
-
-
-
-
-app.use(cors())
 app.use(passport.initialize());
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 app.use(errorHandler)
 app.use(cookieParser())
+app.use(cors())
 
 app.use("/", accessbilityRouter)
 app.use("/games", leaderboardRouter)
