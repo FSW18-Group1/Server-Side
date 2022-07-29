@@ -10,7 +10,7 @@ const { accessbilityRouter } = require('./routes/accessbilityRouter')
 const { leaderboardRouter } = require('./routes/leaderboardRouter')
 const errorHandler = require('./middlewares/errorHandler')
 const cookieParser = require('cookie-parser')
-const PORT = process.env.PORT || 3000
+
 
 app.use(passport.initialize());
 app.use(express.urlencoded({extended: false}))
@@ -25,7 +25,5 @@ app.use(passport.authenticate('jwt', { session: false }))
 app.use("/profile", playerRouter)
 
 
+module.exports = app
 
-app.listen(PORT, () => {
-  console.log(`Listening on http://localhost:${PORT}`)
-})

@@ -2,7 +2,7 @@
 const { hashPassword } = require("../middlewares/passwordHandler");
 
 module.exports = {
-  async up (queryInterface) {
+  async up (queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -32,7 +32,7 @@ module.exports = {
    ])
   },
 
-  async down (queryInterface) {
+  async down (queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *

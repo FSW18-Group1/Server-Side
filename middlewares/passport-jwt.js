@@ -12,7 +12,7 @@ const options = {
 passport.use(new JwtStrategy(options,(payload,done)=>{
   Players.findByPk(payload.id)
   .then((response)=>{
-    console.log(payload.id)
+    // console.log(payload.id)
     done(null,response)
   })
   .catch((error)=>{

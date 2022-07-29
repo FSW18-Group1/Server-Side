@@ -2,7 +2,6 @@
 const {
   Model
 } = require('sequelize');
-const {hashPassword} = require ('../middlewares/passwordHandler')
 module.exports = (sequelize, DataTypes) => {
   class Players extends Model {
     /**
@@ -50,11 +49,6 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   }, {
-    hooks: {
-      async beforeCreate(instance){
-        instance.password = await hashPassword(instance.password);
-      }
-    },
     sequelize,
     modelName: 'Players',
   });

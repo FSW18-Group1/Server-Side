@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "jest"
+    "start": "node server.js",
+    "start-dev": "nodemon server.js",
+    "migrate": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "migrate:reset": "npx sequelize-cli db:seed:undo:all && npx sequelize-cli db:migrate:undo:all && npm run migrate",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000 ",
+    "pretest": "cross-env NODE_ENV=test npm run migrate:reset"
   },
   "repository": {
     "type": "git",
@@ -31,9 +35,16 @@
     "sequelize": "^6.19.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^8.18.0",
-    "jest": "^28.1.1",
+    "jest": "^28.1.2",
     "sequelize-cli": "^6.4.1",
     "supertest": "^6.2.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }

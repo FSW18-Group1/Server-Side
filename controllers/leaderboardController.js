@@ -16,12 +16,7 @@ class LeaderboardsController {
           result: 'Success',
           data: listLeaderboards,
         });
-      } else {
-        res.status(404).json({
-          result: 'Failed',
-          message: 'Data not found',
-        });
-      }
+      } 
     } catch (error) {
       next (error);
     }
@@ -37,22 +32,15 @@ class LeaderboardsController {
         include:[ Games, Players ],
         attributes: {
           exclude: ['createdAt','updatedAt'],
-        }
+        },
       });
       if (listLeaderboard) {
-        console.log(("datanya",listLeaderboard));
+        // console.log(("datanya",listLeaderboard));
         res.status(200).json({
           result: 'Success',
           data: listLeaderboard
         });
-      } else {
-        res.status(404).json({
-          result: 'Failed',
-          message: 'Data not found',
-        });
-      }
-
-
+      } 
     } catch (error) {
       next(error);
     }
@@ -60,14 +48,14 @@ class LeaderboardsController {
 
   static async submitScore(req,res,next){
     try {
-      const {id} = req.params;
-      const points  = req.body.points; 
-      const player = req.body.id;
+      const {id} = await req.params;
+      const points  = await req.body.points; 
+      const player = await req.body.id;
       const listplayer = await Leaderboards.findOne({where:{
         playerId: player,
         gameId: id,
       }})
-      console.log(listplayer);
+      // console.log(listplayer);
       if (!listplayer) {
         const createdLeaderboard = await Leaderboards.create({
           playerId: player,
@@ -101,5 +89,6 @@ class LeaderboardsController {
     }
   }
 }
+
 
 module.exports = { LeaderboardsController }
